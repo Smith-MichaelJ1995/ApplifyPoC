@@ -48,16 +48,18 @@
             // add content type header to object
             myHeaders.append("Content-Type", "application/json");
             // using built in JSON utility package turn object to string and store in a variable
-            var raw = JSON.stringify({"num1":num1,"num2":num2});
+            // var raw = JSON.stringify({"num1":num1,"num2":num2});
             var uri = "https://3wvbxf0k54.execute-api.us-east-1.amazonaws.com/testStage0/addNumberCalc?num1="+num1+"&num2="+num2
             
             // fetch the API
             fetch(uri, {
                 method: 'GET',
                 headers: myHeaders,
-                body: raw,
                 redirect: 'follow'
             })
+
+
+
             .then(response => response.json())
             .then(data => console.log(data))
             .catch(error => console.error('Error:', error));
