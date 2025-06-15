@@ -1,3 +1,78 @@
+<!DOCTYPE html>
 <html>
-    <h1>Hello World!</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Add Two Numbers Calculator</title>
+    <!-- Styling for the client UI -->
+    <style>
+    h1 {
+        color: #FFFFFF;
+        font-family: system-ui;
+		margin-left: 20px;
+        }
+	body {
+        background-color: #222629;
+        }
+    label {
+        color: #86C232;
+        font-family: system-ui;
+        font-size: 20px;
+        margin-left: 20px;
+		margin-top: 20px;
+        }
+     button {
+        background-color: #86C232;
+		border-color: #86C232;
+		color: #FFFFFF;
+        font-family: system-ui;
+        font-size: 20px;
+		font-weight: bold;
+        margin-left: 30px;
+		margin-top: 20px;
+		width: 140px;
+        }
+	 input {
+        color: #222629;
+        font-family: system-ui;
+        font-size: 20px;
+        margin-left: 10px;
+		margin-top: 20px;
+		width: 100px;
+        }
+    </style>
+    <script>
+        // callAPI function that takes the base and exponent numbers as parameters
+        var callAPI = (num1,num2)=>{
+            // instantiate a headers object
+            var myHeaders = new Headers();
+            // add content type header to object
+            myHeaders.append("Content-Type", "application/json");
+            // using built in JSON utility package turn object to string and store in a variable
+            var raw = JSON.stringify({"num1":num1,"num2":num2});
+            var uri = "https://3wvbxf0k54.execute-api.us-east-1.amazonaws.com/testStage0/addNumberCalc?num1="+num1+"&num2="+num2
+            
+            // fetch the API
+            fetch(uri, {
+                method: 'GET',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            })
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</head>
+<body>
+    <h1>TO THE POWER OF MATH!</h1>
+	<form>
+        <label>Base number:</label>
+        <input type="text" id="num1">
+        <label>...to the power of:</label>
+        <input type="text" id="num2">
+        <!-- set button onClick method to call function we defined passing input values as parameters -->
+        <button type="button" onclick="callAPI(document.getElementById('num1').value,document.getElementById('num2').value)">CALCULATE</button>
+    </form>
+</body>
 </html>
