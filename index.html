@@ -62,7 +62,10 @@
 
             .then(response => response.json())
             .then(
-                data => console.log(data),alert("The result is: " + data.result)
+                data => {
+                    console.log(data)
+                    alert("Success!")
+                }
             )
             .catch(error => console.error('Error:', error));
         }
